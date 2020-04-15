@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name = "viewport" content = "width = device-width , initial scale = 1" >
+	<script>
+	
+	var timer;
+	var count1=0;
+	var rand1;
+	var index;
+	var num = [[1,8,6,7,2,5,4,3,9],[3,7,5,8,4,1,2,6,9],[2,5,4,7,1,6,3,8,9],[8,1,3,2,6,4,5,7,9],[5,3,7,4,2,8,6,1,9],[6,2,4,1,5,3,8,7,9],[4,5,8,3,6,2,1,7,9],[7,6,1,8,5,3,4,2,9]];
+	function disp(str){
+		alert(str);
+	}
+	document.onkeydown = function() {
+	    switch (window.event.keyCode) {
+	        case 37:
+	         //disp('Left key is pressed') // execute a function by passing parameter
+	         //myfunc1() 
+	         break;
+	        case 38:
+	        // disp('Up  key is pressed') 
+	         //myfunc2()
+	         break;
+	        //case 39:
+			//disp('Right key is pressed') 		
+	        // break;
+	        case 39:
+	        myfunc3();
+			//disp('Down key is pressed')  
+			
+	        break;
+
+	    }
+	};
+
+
+	function sleep(ms) {
+	  return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	function countDown3(secs, elem){
+		var element = document.getElementById(elem);
+		if(secs==8){
+			rand1 = Math.floor(Math.random()*(8));
+			index=0;
+		}
+		//console.log("count");
+		element.innerHTML = num[rand1][index++];
+
+		secs--;
+		timer = setTimeout('countDown3('+secs+',"'+elem+'")',750);
+
+		if(secs < 0){
+			count1++;
+			console.log("Event 3 : No Response");
+			if(count1>=20){
+				window.stop();
+				myfunc3();
+			}
+			else{
+				clearTimeout(timer);
+				divi3();
+				countDown3(8,elem);
+			}	
+		}
+	}
+
+	function myfunc3(){
+		clearTimeout(timer);
+		if(count1<20){
+			var s1 = document.getElementById("div2").innerHTML;	
+			var s2 = document.getElementById("div5").innerText;
+			if(s1 == s2)
+	            //alert("Correct Response");
+	        	console.log("Event 3: Correct Response");
+	        else
+	            //alert("Incorrect Response");
+	        	console.log("Event 3: Incorrect Response");
+			divi3();
+			count1++;
+			index=0;
+			countDown3(8,"div2");
+		}
+		else{
+			console.log("Event 3 : Completed ");
+			window.stop();
+		}
+	
+	}
+
+
+
+    </script>
+
+	<style type="text/css">
+		body
+		{
+			font-family: Arial;
+			font-size: 15px;
+			/*color : white;*/
+		}
+
+		#split {
+			height :100%;
+			width : 100%;
+			position: fixed;
+			z-index: 1;
+			
+		}
+
+		#right{
+
+			height :100%;
+			width : 100%;
+
+			background-color: #B0C4DE;
+		
+
+		}
+
+		#centered {
+			position: absolute;
+			top: 50%;
+			left:50%;
+			transform: translate(-50% , -50%);
+			text-align: center; 	
+		}
+
+		#div2 {
+			font-size: 500%;
+		    width: 200px;
+		    height: 200px;
+		    padding: 20px;
+		    border: 4px solid gray;
+		    margin: auto;
+		    text-align: center; 
+		    display: flex;
+    		align-items: center;
+    		justify-content: center;
+		    background-color: #FFA500;
+
+
+		}
+
+
+		#div5 {
+			font-size: 200%;
+		    text-align: center; 
+		   
+
+
+		}
+
+
+
+		#container{
+		    text-align: center;
+		    margin-top: 50px;    
+		    font-family: sans-serif;
+		    padding-bottom: 50px;
+		}
+
+		
+	</style>
+</head>
+<body>
+<div id = "split">
+
+	<div id = "right">
+		<div id = "centered">
+			<div id="container text-center">
+		  		<div id="div5">
+					<script>
+						function divi3()
+						{
+							var rand2 = Math.floor(Math.random()*(8))+1;
+							document.getElementById("div5").innerHTML = rand2;
+							
+						}
+					</script>
+				</div>
+				<div id="div2">
+				</div>
+			</div>
+		</div> 
+	</div>
+	<script type="text/javascript">
+		//async function time(){
+				divi3();	
+				countDown3(8,"div2");
+	
+		//}
+		//time();
+
+	</script>
+</div>
+
+
+</body>
+</html>

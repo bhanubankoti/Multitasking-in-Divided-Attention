@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name = "viewport" content = "width = device-width , initial scale = 1" >
+	<script>
+	var colour = [[0,0,0,"black"],[255,255,255,"white"],[255,0,0,"red"],[0,0,255,"blue"],[255,255,0,"yellow"],[255,0,255,"magenta"],[128,128,128,"gray"],[0,128,0,"green"],[255,165,0,"orange"]];
+	
+	var timer;
+	var count1=0;
+	var index=0,rand=0,temp=0;
+	var num = [[3,7,5,0,4,1,2,6,8],[0,1,3,2,6,4,5,7,8],[1,0,6,7,2,5,4,3,8],[5,3,7,4,2,0,6,1,8],[6,2,4,1,5,3,0,7,8],[4,5,0,3,6,2,1,7,8],[2,5,4,7,1,6,3,0,8],[7,6,1,0,5,3,4,2,8]];
+
+	document.onkeydown = function() {
+	    switch (window.event.keyCode) {
+	        case 37:
+	         //disp('Left key is pressed') // execute a function by passing parameter
+	         //myfunc1() 
+	         break;
+	        case 38:
+	        // disp('Up  key is pressed') 
+	         myfunc2()
+	         break;
+	        //case 39:
+			//disp('Right key is pressed') 		
+	        // break;
+	        case 39:
+	        //myfunc3();
+			//disp('Down key is pressed')  
+	        break;
+
+	    }
+	};
+
+
+	function sleep(ms) {
+	  return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	function countDown2(secs, elem){
+		if(secs==8){
+			rand = Math.floor(Math.random()*8);
+			index=0;
+		}
+		
+		var element = document.getElementById(elem);
+		//console.log(num[rand][index]);
+		temp = num[rand][index];
+		var bg = "background:rgb("+colour[temp][0]+","+colour[temp][1]+","+colour[temp][2]+");";
+		index++;
+		element.style=bg;
+		secs--;
+		timer = setTimeout('countDown2('+secs+',"'+elem+'")',750);
+		if(secs < 0){
+			count1++;
+			
+			console.log("Event 2 : No Response");
+
+			if(count1>=20){
+				window.stop();
+				myfunc2();
+			}
+			else{
+				clearTimeout(timer);
+				divi2();
+				countDown2(8,elem);
+			}
+		}
+	}
+
+	function myfunc2(){
+		clearTimeout(timer);
+		if(count1<20){
+			var t2=div1.style.backgroundColor;
+			var t1=document.getElementById("div4").innerText;
+			count1++;
+			var t3,j;
+			for(j=0;j<8;j++)
+			{
+				if(colour[j][3]==t1)
+				{
+					t3="rgb("+colour[j][0]+", "+colour[j][1]+", "+colour[j][2]+")";
+					break;
+				}
+			}
+
+			if(t3 == t2)
+	            //alert("Correct Response");
+	        	console.log("Event 2: Correct Response");
+	        else
+	            //alert("Incorrect Response");
+	        	console.log("Event 2: Incorrect Response");
+
+			divi2();
+			countDown2(8,"div1");
+		}
+		else{
+			console.log("Event 2 : Completed ");
+			window.stop();
+			return;
+		}
+		
+	}
+
+    </script>
+
+	<style type="text/css">
+		body
+		{
+			font-family: Arial;
+			/*color : white;*/
+		}
+
+		#split {
+			height :100%;
+			width : 100%;
+			position: fixed;
+			z-index: 1;
+			overflow-x: hidden;
+		}
+
+
+
+
+		#mid{
+			height :100%;
+			width : 100%;
+			background-color: #B0C4DE;
+		}
+
+		#centered {
+			position: absolute;
+			top: 50%;
+			left:50%;
+			transform: translate(-50% , -50%);
+			text-align: center; 
+
+			
+			
+		}
+
+		#div1 {
+		    width: 200px;
+		    height: 200px;
+		    padding: 10px;
+		    border: 4px solid gray;
+		    margin: auto;
+		}
+
+		#container{
+		    text-align: center;
+		    margin-top: 50px;
+		    font-family: sans-serif;
+		    padding-bottom: 50px;
+		}
+
+		
+	</style>
+</head>
+<body>
+<div id = "split">
+
+	<div id = "mid">
+		<div id = "centered">
+			<div id="container text-center">
+				<div id="div4">
+					<script>
+						function divi2()
+						{
+							var rand1 = Math.floor(Math.random()*(8));
+							document.getElementById("div4").innerHTML = colour[rand1][3].bold();
+						}
+					</script>
+				</div>
+					<div id="div1">
+					</div>
+			</div>
+		</div> 
+	</div>
+	<script type="text/javascript">
+		async function time(){
+			divi2();
+			countDown2(8,"div1");
+		}
+		time();
+		
+	</script>
+</div>
+
+
+</body>
+</html>
